@@ -4,10 +4,8 @@ import utils.ParseMolFile
 import java.lang.StringBuilder
 
 fun main() {
-//    val molGraph = ParseMolFile("ChEBI_15365.mol").toGraph()
+    val molGraph = ParseMolFile("ChEBI_15365.mol").toGraph()
 //    val molGraph = ParseMolFile("ChEBI_17578.mol").toGraph()
-//    val molGraph = ParseMolFile("ChEBI_32879.mol").toGraph()
-    val molGraph = ParseMolFile("ChEBI_60099.mol").toGraph()
     val isomorphicMolGraph = MorganAlg(molGraph).run()
     isomorphicMolGraph.graphviz()
     val min = isomorphicMolGraph.vertices.first().weight
