@@ -10,7 +10,8 @@ import kotlin.math.sqrt
 import kotlin.streams.toList
 
 fun main() {
-    val data = trainDataCSV()
+//    val data = trainDataCSV()
+    val data = trainDataPolynomial()
     val w0 = ArrayList<Double>()
     val b0 = 0.0
     for (i in data.first().second.indices) {
@@ -19,8 +20,11 @@ fun main() {
 
     val weights = gradientDescend(w0, b0, data.subList(0, 2 * data.size / 3))
     for (i in 2 * data.size / 3 until data.size) {
-        val yhat = scalarMulArrays(data[i].second, weights.subList(0, weights.size).toList() as ArrayList<Double>) + weights.last()
-        println(data[i].first - yhat)
+        val yhat = scalarMulArrays(
+            data[i].second,
+            weights.subList(0, weights.size).toList() as ArrayList<Double>
+        ) + weights.last()
+//        println(data[i].first - yhat)
     }
 }
 
@@ -158,6 +162,7 @@ fun gradientDescend(
     val errors = ArrayList<Double>()
 
     while (k <= 100) {
+        errors.clear()
         for (x in train) {
             error = (x.first - (scalarMulArrays(wk, x.second) + bk))
             errors.add(error)
@@ -168,7 +173,7 @@ fun gradientDescend(
             bk = bkNew
 
         }
-//        println(errors.sum() / train.size)
+        println(errors.sum() / train.size)
         k++
     }
     wk.add(bk)
